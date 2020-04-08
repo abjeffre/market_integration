@@ -26,24 +26,27 @@ The three broad categories of interest that a paper may relate to are:
 
 - What are the conditions (ecological but perhaps also social), that favour trade over other forms of spatio-temporal averaging (mobility, storage, etc.) [code 3]
 
+
+Going forward, the researcher should copy and paste the template in the literature section and fill in all the relevant blocks
+
 ----------------------------template------------------------------------------------------------------------------------
 
-Paper citation
+# Paper citation
 
 
-Summary sentence 
+# Summary sentence 
 
 
-Which key question is it related to and how
+# Which key question is it related to and how
 
 
-Type of research (empirical, model, review)
+# Type of research (empirical, model, review)
 
 
-Model present?
+# Model present?
 
 
-If yes, sketch, and note euqations
+# If yes, sketch, and note equations
 
 
 ```{}
@@ -51,19 +54,93 @@ If yes, sketch, and note euqations
 ```
 
 
-DAG of formal OR verbal model
+# DAG of formal OR verbal model
 
 ```{r}
 
 ```
 
 
-Notes
+# Notes & issues
 
 
 
 -----------------------end-template---------------------------------------------------------------------------------------
 
+##Literature
+
+# Paper citation
+
+Gavrilets, S. (2010). Rapid transition towards the division of labor via evolution of developmental plasticity. PLoS Computational Biology, 6(6), 1–10. https://doi.org/10.1371/journal.pcbi.1000805
+
+
+# Summary sentence 
+Using functional division of cells under multicellularity as a model, Gavrilets shows that functional division can evolve easily and in not so many generations through developmental plasticity
+
+
+# Which key question is it related to and how
+2 - the paper deliberates on the question of how a division of functions between cells can arise, that is, under what conditions. The system under question is division under multicellularity.
+
+# Type of research (empirical, model, review)
+modeling
+
+# Model present?
+yes
+
+# If yes, sketch, and note equations
+```{}
+#"To capture the fundamental trade-offs between cells division and locomotion capabilities  I postulate indirect negative effects of X on viability and ofY on fertility." a is streght of selection, b is stregth of tradeoffs
+
+#fertility
+f <- X^a * (1-Y)^b
+
+#viability
+v <- Y^a * (1-X)^b
+
+#viability of colony is average viability of cells
+V <- Sum(v[i]/S)
+
+#beverton-holt model for viability selection
+#N = total number of colonies
+#K = carrying capacity
+[1+(b-1)*(N/KV) ]^-1
+
+#mutation, resulting in approx d/2 mutated cells per colony
+#gene regulation, through two suppressor genes that affect fertility and viability
+#reduction of viability and fertility happens through gaussian functions, I'm not sure how to rewrite these here
+
+
+#results
+#"In general, analytical and numerical results show that increasing the strength of selection a, the strength of trade-offs b, and decreasing the colony size S result in decreasing both fitness components and the population size"
+
+
+
+```
+
+
+# DAG of formal OR verbal model
+```{r}
+#note in this case the verbal model stems from the model analysis 
+
+# selection on major loci -> evolution of developmental plasticity -> suppression of complementary functions in different subsets of population
+#under conditions: strong trade-off between functions, high mutation rates, low costs to dev. plasticity, some sort of external cue/environmental change to set things in motion
+
+#DAG
+
+gavrilets_dag <- dagitty( "dag {
+          selection_loci -> ev_dev_plast
+          ev_dev_plast -> supp_comp_func
+}")
+
+coordinates(gavrilets_dag) <- list( x = c(selection_loci = 1, ev_dev_plast = 2, supp_comp_func = 3),
+                             y = c(selection_loci= 1, ev_dev_plast = 1, supp_comp_func = 1))
+
+plot(gavrilets_dag)
+```
+
+# Notes & issues
+- interesting point in the discussion: cell types increase with number of cells because the number of cells changes the fitness landscape and thus division of labour/specialisation is necessary for optimization. Would this link to some arguments made about population size and trade? It also could be reformulated as a niche construction argument where a growing population changes the environment such that division of labour is necessary. This would be a neat feedback loop to model. 
+- the model is not really general, it is "biologicall realistic" and tuned to the case of multicellularity
 
 
 
