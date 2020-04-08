@@ -1,0 +1,71 @@
+---
+title: "literature_master"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Dependencies
+library(dagitty)
+library(rethinking)
+
+
+```
+
+
+## Template
+
+The first part of this project involves a broad literature search and distillation process. Using the template below we summarize relevant literature.
+
+The three broad categories of interest that a paper may relate to are:
+
+- It is a obvious that trade comes about as a result of costs and benefits, but what are these specifically? Particularly in relation to ecology and culture [code 1]
+
+- What is the relationship/process between the division of labour and trade? [code 2]
+
+- What are the conditions (ecological but perhaps also social), that favour trade over other forms of spatio-temporal averaging (mobility, storage, etc.) [code 3]
+
+----------------------------template------------------------------------------------------------------------------------
+
+Paper citation
+
+
+Summary sentence 
+
+
+Which key question is it related to and how
+
+
+Type of research (empirical, model, review)
+
+
+Model present?
+
+
+If yes, sketch, and note euqations
+
+
+```{}
+
+```
+
+
+DAG of formal OR verbal model
+
+```{r}
+
+```
+
+
+Notes
+
+
+
+-----------------------end-template---------------------------------------------------------------------------------------
+
+
+
+
+
+
