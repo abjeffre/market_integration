@@ -1,0 +1,112 @@
+---
+title: "literature_master"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+# Dependencies
+library(dagitty)
+library(rethinking)
+
+
+```
+
+
+## Template
+
+The first part of this project involves a broad literature search and distillation process. Using the template below we summarize relevant literature.
+
+The three broad categories of interest that a paper may relate to are:
+
+- It is a obvious that trade comes about as a result of costs and benefits, but what are these specifically? Particularly in relation to ecology and culture [code 1]
+
+- What is the relationship/process between the division of labour and trade? [code 2]
+
+- What are the conditions (ecological but perhaps also social), that favour trade over other forms of spatio-temporal averaging (mobility, storage, etc.) [code 3]
+
+----------------------------template------------------------------------------------------------------------------------
+
+Paper citation
+
+Cooper, Guy A., and Stuart A. West. "Division of labour and the evolution of extreme specialization." Nature ecology & evolution 2.7 (2018): 1161-1167.
+
+Summary sentence 
+
+Here, we model the division of labour over a cooperative behaviour, considering both when it should evolve and the extent to which the different types should become specialized. We found that: (1) division of labour is usually—but not always—favoured by high efficiency benefits to specialization and low within-group conflict; and (2) natural selection favours extreme specialization, where some individuals are completely dependent on the helping behaviour of others
+
+
+Which key question is it related to and how
+
+Division of Labor and Trade
+
+
+Type of research (empirical, model, review)
+
+Model
+
+
+Model present?
+
+Yes
+
+If yes, sketch, and note euqations
+
+
+```{}
+n <- 100 # number of individuals 
+p <- sum(rbinom(n, 1, prob = 0.5))/n # proportion of population with phenotype 1
+q1 <- runif(1, 0, 1) # share of lifetime effort devoted to the production of "cooerpative outcome ie. dol" by phenotype 1
+q2 <- runif(1, 0, 1) # share of lifetime effort devoted to the production of "cooerpative outcome ie. dol" by phenotype 2
+lambda <- runif(1, 0, 1) # share of "cooperative outcome" shard with others
+alpha <- rexp(1, 1) # scale of cooperative behavior
+e <- runif(1, 0, 1) # how essential the cooperative trait is to survival
+P <-  #the average other only trait value of neighboors ???
+Q1 <-  #the average other only trait value of neighboors ???
+Q2 <-   #the average other only trait value of neighboors ???
+
+
+#fitness 
+W <- p*(1-q1)*((l-e)+e*((1-lambda)*q1^alpha +  #gains to self from self production | phenotype 1
+lambda*(P*Q1^alpha + (1-p)Q2^alpha))) +        #gains to self from others prodution | phenotype 1
+(1-p)*(1-q2)*((l-e)+e*((1-lambda)*q2^alpha +   #gains to self from self production | phenotype 2
+lambda*(P*Q1^alpha + (1-p)Q2^alpha)))          #gains to self from others prodution | phenotype 2
+
+
+```
+
+
+
+DAG of formal OR verbal model
+
+```{r}
+
+```
+
+
+Notes
+
+Note that I cannot tell how they are integrating relatedness into the simulation model, it is present in the partial differential as a fixed parameter but it is not clear how they integrate this into the numerical solutions.
+
+
+
+Predictions 
+
+1. (a) If the trait is non-essential (e < 1), higher relatedness (higher R) favours division of labour. (b) If the trait is essential (e = 1), there is no effect of the value of relatedness.
+
+2. (a) If relatedness, trait sociality and trait essentiality are high (higher R, λ and e), a higher efficiency benefit to specialization (higher α) favours division of labour. (b) Otherwise, uniform noncooperation may be favoured.
+
+3. Higher trait sociality (higher λ) favours division of labour.
+
+4. If relatedness and trait sociality are low and the efficiency benefits are high (low R and λ; high α), a higher trait essentiality (higher e) favours division of labour.
+–
+5. Depending on how group size (N) influences factors such as the efficiency benefits to specialization (α), the extent to which the benefits of cooperation are shared (λ) or social group relatedness (R), a larger group may favour or disfavour division of labour.
+
+-----------------------end-template---------------------------------------------------------------------------------------
+
+
+
+
+
+
