@@ -68,9 +68,9 @@ Q2 <-   #the average other only trait value of neighboors ???
 
 
 #fitness 
-W <- p*(1-q1)*((l-e)+e*((1-lambda)*q1^alpha +  #gains to self from self production | phenotype 1
+W <- p*(1-q1)*((1-e)+e*((1-lambda)*q1^alpha +  #gains to self from self production | phenotype 1
 lambda*(P*Q1^alpha + (1-p)Q2^alpha))) +        #gains to self from others prodution | phenotype 1
-(1-p)*(1-q2)*((l-e)+e*((1-lambda)*q2^alpha +   #gains to self from self production | phenotype 2
+(1-p)*(1-q2)*((1-e)+e*((1-lambda)*q2^alpha +   #gains to self from self production | phenotype 2
 lambda*(P*Q1^alpha + (1-p)Q2^alpha)))          #gains to self from others prodution | phenotype 2
 
 
