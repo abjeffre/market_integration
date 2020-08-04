@@ -1,21 +1,30 @@
 
-k = 1,                                      # Learning efficency, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps.  These are then transformed within the model.
-alpha = 1,                                  # Production elasticity, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the model.
-skew = 2,                                   # Shape on dirichlet distribution that determines initial time allocations, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the model
-yeild = 100,                                # The max group yeild for each good, , note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the mode. 
-rank = rep(1, ngoods),                      # Elasticies/rank importance of each good in utility functions.  NOTE A: The this parameter is contrained by the choice of utility function and number of goods. Note B. This should be a vector of length ngoods, but single values can be inputed for parameter sweeps, these are then transformed within the model
-max_visits = 20,                            # Number of trading visits before individuals stop.
-relatedness = 0,                            # Relatedness within the group,  1 is everyone is a clone.
-trade_cost = 0,                             # The cost of each trading trip.
-utility = "leontif",                        # Currently the simulation accepts Cobb douglas, Log-Linear, CES, Stone-Greary and Leontif, please be aware of constraints imposed by the utility function on "Rank"
-gamma = 1,                                  # This is the subsitence level for Stone Greary utility functions: Note that this value is scaled 1/ngoods  
-rho = .5,                                   # This controls the subsitution in CES functions. 
-beta = 1,                                   # This controls how returns are a function of total group effort.
-omega = 0.1,                                # Probability of environmental change.
-trading = T,                                # This is a meta variable that toggles if the trading portion of the model runs.
-sharing = T,                                # This is a meta variable that toggles if the trading portion of the model runs.
-specialization = T,                         # This is a meta variable that toggles if the specialization portion of the model runs.
-fluctuations = F                            # This is a meta variable that toggles if there is environmental variation.
+library("parallel")
+library(gtools)
+sim_dol_ngoods <- function( 
+  nsim = 10,
+  ngen = 1e3,                                 # Generations
+  n = 200,                                    # Population Size
+  groups = 20,                                # Groups
+  ngoods = 2,                                 # Number of Goods
+  mu = 0.001,			                            # Mutation rate
+  k = 1,                                      # Learning efficency, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps.  These are then transformed within the model.
+  alpha = 1,                                  # Production elasticity, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the model.
+  skew = 2,                                   # Shape on dirichlet distribution that determines initial time allocations, note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the model
+  yeild = 100,                                # The max group yeild for each good, , note that this should be a vector of length ngoods, but single values can be inputed for parameter sweeps. These are then transformed within the mode. 
+  rank = rep(1, ngoods),                      # Elasticies/rank importance of each good in utility functions.  NOTE A: The this parameter is contrained by the choice of utility function and number of goods. Note B. This should be a vector of length ngoods, but single values can be inputed for parameter sweeps, these are then transformed within the model
+  max_visits = 20,                            # Number of trading visits before individuals stop.
+  relatedness = 0,                            # Relatedness within the group,  1 is everyone is a clone.
+  trade_cost = 0,                             # The cost of each trading trip.
+  utility = "leontif",                        # Currently the simulation accepts Cobb douglas, Log-Linear, CES, Stone-Greary and Leontif, please be aware of constraints imposed by the utility function on "Rank"
+  gamma = 1,                                  # This is the subsitence level for Stone Greary utility functions: Note that this value is scaled 1/ngoods  
+  rho = .5,                                   # This controls the subsitution in CES functions. 
+  beta = 1,                                   # This controls how returns are a function of total group effort.
+  omega = 0.1,                                # Probability of environmental change.
+  trading = T,                                # This is a meta variable that toggles if the trading portion of the model runs.
+  sharing = T,                                # This is a meta variable that toggles if the trading portion of the model runs.
+  specialization = T,                         # This is a meta variable that toggles if the specialization portion of the model runs.
+  fluctuations = F                            # This is a meta variable that toggles if there is environmental variation.
 
 ){
   
